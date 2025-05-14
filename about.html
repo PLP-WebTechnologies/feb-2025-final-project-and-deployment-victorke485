@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CodeSphere</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">CodeSphere</div>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/about.html" class="active">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">☰</div>
+        </nav>
+    </header>
+    <main>
+        <section class="about">
+            <h2>About CodeSphere</h2>
+            <p>CodeSphere is a tech blog dedicated to sharing the latest trends, tutorials, and insights in technology and programming. Our mission is to empower developers and tech enthusiasts with high-quality, up-to-date content.</p>
+            
+            <h3>What We Cover</h3>
+            <ul>
+                <li>Artificial Intelligence & Machine Learning</li>
+                <li>Web Development & Design</li>
+                <li>Cloud & DevOps</li>
+                <li>Cybersecurity</li>
+                <li>Programming Tutorials</li>
+                <li>Tech Industry News</li>
+            </ul>
+            
+            <h3>Our Team</h3>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/assets/images/amina.jpg" alt="Amina Mwangi" class="team-photo">
+                    <h4>Amina Mwangi</h4>
+                    <p>Editor-in-Chief</p>
+                    <p>Amina leads the editorial team and ensures every article meets our quality standards. She has over 10 years of experience in tech journalism.</p>
+                </div>
+                <div class="team-member">
+                    <img src="/assets/images/kevin.jpg" alt="Kevin Otieno" class="team-photo">
+                    <h4>Kevin Otieno</h4>
+                    <p>Tech Writer</p>
+                    <p>Kevin specializes in web development and cloud computing. He loves breaking down complex topics into easy-to-understand guides.</p>
+                </div>
+                <div class="team-member">
+                    <img src="/assets/images/wanjiku.jpg" alt="Wanjiku Njeri" class="team-photo">
+                    <h4>Wanjiku Njeri</h4>
+                    <p>Community Manager</p>
+                    <p>Wanjiku connects with our readers, manages our social channels, and organizes community events and webinars.</p>
+                </div>
+            </div>
+            
+            <h3>Join Our Community</h3>
+            <p>We welcome guest posts, feedback, and collaboration. Connect with us on social media or <a href="/contact.html">contact us</a> directly!</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 CodeSphere. All rights reserved.</p>
+    </footer>
+    <script src="/assets/script.js"></script>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    );
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error(e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
+    </script>
+</body>
+</html>

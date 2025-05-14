@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSphere - Tech Blog</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">CodeSphere</div>
+            <ul class="nav-links">
+                <li><a href="/index.html" class="active">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">☰</div>
+        </nav>
+    </header>
+    <main>
+        <section class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="/assets/images/slider1.jpg" alt="Tech Article 1">
+                    <div class="slide-caption">
+                        <h2>AI Revolution</h2>
+                        <p>How Artificial Intelligence is changing the world in 2025.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="/assets/images/slider2.jpg" alt="Tech Article 2">
+                    <div class="slide-caption">
+                        <h2>Modern Web Development</h2>
+                        <p>Discover the latest frameworks and design trends.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="/assets/images/slider3.jpg" alt="Tech Article 3">
+                    <div class="slide-caption">
+                        <h2>Cloud Computing</h2>
+                        <p>Why the cloud is the backbone of modern apps.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+            <div class="slider-dots"></div>
+        </section>
+        <section class="posts">
+            <h2 class="styled-header">Latest Posts</h2>
+            <div class="post-grid">
+                <article class="post">
+                    <h3 class="styled-subheader">Exploring AI in 2025</h3>
+                    <p>Discover how AI is shaping the future of technology...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Web Dev Trends</h3>
+                    <p>The latest frameworks and tools for 2025...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Cloud Computing</h3>
+                    <p>Why the cloud is the backbone of modern apps...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Cybersecurity Essentials</h3>
+                    <p>Protect your data with these essential security practices...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">DevOps in Action</h3>
+                    <p>How DevOps is streamlining software delivery in 2025...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Quantum Computing Breakthroughs</h3>
+                    <p>See how quantum computers are solving problems once thought impossible...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Remote Work Tech</h3>
+                    <p>The best tools and practices for productive remote teams in 2025...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Green IT Initiatives</h3>
+                    <p>How technology is driving sustainability and eco-friendly solutions...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="post">
+                    <h3 class="styled-subheader">Edge Computing Explained</h3>
+                    <p>Understanding the rise and benefits of edge computing in modern tech...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 CodeSphere. All rights reserved.</p>
+    </footer>
+    <script src="/assets/script.js"></script>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+    </script>
+</body>
+</html>
